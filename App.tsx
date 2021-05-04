@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import { Provider as PaperProvider } from 'react-native-paper';
+
+import MainRoutes from './src/router'
+
+import PokemonHollow from './assets/fonts/pokemon/Pokemon-Hollow.ttf'
+import PokemonSolid from './assets/fonts/pokemon/Pokemon-Solid.ttf'
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    PokemonHollow,
+    PokemonSolid,
+  })
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <MainRoutes />
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
